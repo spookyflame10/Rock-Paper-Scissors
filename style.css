@@ -1,0 +1,59 @@
+body {
+    font-family: 'Macondo Swash Caps', cursive;
+    color: #929292;
+    background-color: #000000;
+  }
+  .header, .main-content{
+    text-align: center;
+    font-size: 25px;
+  }  
+  .Gray {
+    color: #8070ac;
+  }
+  .White {
+    color: #ffffff;
+  }
+  .red {
+    color: #f70029;
+  }
+  .green{
+    color: #00ff9d;
+  }
+.button{
+    background-color: rgb(95, 15, 15);
+    font-family: 'Macondo Swash Caps', cursive;
+    font-weight: 900;
+    padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+.button:hover {background-color: #000000}
+.button:active {
+  background-color: #494949;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.scores-container, .results{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.results{ flex-direction: column;}
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    border: 5px solid rgb(30, 194, 216);
+    margin-top: 3px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    font-size: 20px;
+}   

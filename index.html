@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Rock Paper Scissors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Macondo+Swash+Caps&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <h1>
+        <span class="Gray">Rock</span>
+        <span class="White">Paper</span>
+        <span class="red">Scissors</span>
+      </h1>
+      <p>3 Weapons | 5 Rounds | 2 Destinies</p>
+      <p>
+        <span class="Gray">Rock</span> beats
+        <span class="red">Scissors</span>︱
+        <span class="red">Scissors</span> beats
+        <span class="White">Paper</span> ︱
+        <span class="White">Paper</span> beats <span class="Gray">Rock</span>
+      </p>
+    </header>
+
+    <div class="main-content">
+      <div class="weapons-area">
+        <button id = "z" class="button Gray op">
+          Rock
+        </button>
+        <button class="button White op">
+          Paper
+        </button>
+        <button class="button red op">
+          Scissors
+        </button>
+      </div>
+      <div class ="results-area">
+        <p>Enemy chose <span id="enemy-choice"></span></p>
+        <div class = "scores-area">
+            <p class = "green"> <span>Player Scores </span><span>Computer Scores</span></p>
+            <div class = "scores-container">
+            <div id="playerScore" class ="box">0</div>
+            <div id = "computerScore" class = "box">0</div>
+            </div>
+        </div>
+        <div class = "results">
+            <p class = "green">Results</p>
+            <div id = "Round-result" class = "box"></div>
+        </div>
+      </div>
+      <button id = "reset" class = "button green">Play Again</button>
+    </div>
+  </body>
+</html>
