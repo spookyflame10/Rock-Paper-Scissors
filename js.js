@@ -2,16 +2,16 @@ const optionBtn = document.querySelectorAll('.op');
 const roundResults = document.querySelector('#Round-result');
 const playerPoints = document.querySelector('#playerScore');
 const computerPoints = document.querySelector('#computerScore');
-const resetBtn = document.querySelector('#reset');
-const btn = document.querySelector("#z");
-btn.addEventListener("onclick", () => console.log("bob"));
-//refresh page for new game
-resetBtn.addEventListener('click',() => location.reload());
+const compchoice = document.querySelector('#enemy-choice');
 
-optionBtn.forEach(button => {button.addEventListener('click', () => {
-    console.log("hellow");
-    let playerSelection= (button.target.id);
-    playRound(playerSelection, computerPlay());
+let playerScore = 0;
+let computerScore =0;
+let playerSelection = '';
+//refresh page for new game
+
+optionBtn.forEach(button => {button.addEventListener('click', function(e){
+    playerSelection= (e.target.textContent);
+    playRound(playerSelection, getComputerChoice());
 })});
 
 
@@ -24,35 +24,63 @@ function getComputerChoice(){
     else
         return "SCISSORS";
 }
-
-/*const select = document.querySelector("#player");
-select.addEventListener("change", getPlayer());
-function setPlayer(){
-    player = select.value;
+function displayScore(result){
+    roundResults.textContent = result;
+    playerPoints.textContent = String(playerScore);
+    computerPoints.textContent = String(computerScore);
 }
-*/
-function playRound(playerSelection1, computerSelection) {
-    playerSelection = playerSelection1.toUpperCase();
-    console.log("hellos")
-    if (playerSelection === computerSelection) {
-      return("Tie");
+function putButton(){
+    const container = document.querySelector('.mainContent');
+    const button = document.createElement('button');
+    button.classList.add('button', 'green');
+    button.setAttribute('id', 'reset');
+    button.textContent = "Play Again";
+    container.appendChild(button);
+}
+function endgame(){
+    putButton();
+    const resetBtn = document.querySelector('#reset');  
+    resetBtn.addEventListener('click',() => location.reload());
+    optionBtn.forEach(button => {
+        button.setAttribute('disabled', '');//i guess takes away eventListener
+      });
+    if(playerScore>computerScore){
+        roundResults.textContent = "You Won! You are so Lucky!!!!";
+        roundResults.style.color = 'green';
     }
-    if (
+    else if(computerScore>playerScore){
+        roundResults.textContent = "You Lost! Git Good :(((((";
+        roundResults.style.color = 'red';
+    }
+    else{
+        roundResults.textContent = "Tied";
+        roundResults.style.color = 'blue';
+    }
+}
+function playRound(playerSelection1, computerSelection) {
+    playerSelection = playerSelection1.toUpperCase().trim();
+    compchoice.textContent = String(computerSelection);
+    if(playerScore==5|| computerScore==5){
+      endgame();
+    }
+    else if (playerSelection === computerSelection) {
+      displayScore("Tie");
+    }
+    else if (
       (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||
       (playerSelection === 'SCISSORS' && computerSelection === 'PAPER') ||
       (playerSelection === 'PAPER' && computerSelection === 'ROCK')
     ) {
-      return("You Won! "+ playerSelection + " beats " + computerSelection);
+      playerScore++;
+      displayScore("You Won! "+ playerSelection + " beats " + computerSelection);
     }
-    if (
-      (computerSelection === 'ROCK' && playerSelection === 'SCISSORS') ||
-      (computerSelection === 'SCISSORS' && playerSelection === 'PAPER') ||
-      (computerSelection === 'PAPER' && playerSelection === 'ROCK')
-    ) {
-      return("You Lose " + computerSelection + " beats " + playerSelection);
+    else{
+      computerScore++;
+      displayScore("You Lose " + computerSelection + " beats " + playerSelection);
     }
 }
 
+/*
 function game(){
     let pw=0;
     let cw = 0;
@@ -77,3 +105,7 @@ function game(){
     else
         return("You lose")
 }
+*/
+//(computerSelection === 'ROCK' && playerSelection === 'SCISSORS') ||
+//(computerSelection === 'SCISSORS' && playerSelection === 'PAPER') ||
+//(computerSelection === 'PAPER' && playerSelection === 'ROCK')
