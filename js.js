@@ -2,16 +2,22 @@ const optionBtn = document.querySelectorAll('.op');
 const roundResults = document.querySelector('#Round-result');
 const playerPoints = document.querySelector('#playerScore');
 const computerPoints = document.querySelector('#computerScore');
-const compchoice = document.querySelector('#enemy-choice');
-
+const container = document.querySelector('.mainContent');
+const playerContainer = document.querySelector('.player-container');
+const computerContainer = document.querySelector('.computer-container');
+const log = document.querySelector('.logs-container'); //solely for the purpose of playing play again button
 let playerScore = 0;
 let computerScore =0;
 let playerSelection = '';
-//refresh page for new game
+
 
 optionBtn.forEach(button => {button.addEventListener('click', function(e){
     playerSelection= (e.target.textContent);
-    playRound(playerSelection, getComputerChoice());
+    if(playerScore==5|| computerScore==5){
+        endgame();
+    }
+    else
+        playRound(playerSelection, getComputerChoice());
 })});
 
 
@@ -28,22 +34,22 @@ function displayScore(result){
     roundResults.textContent = result;
     playerPoints.textContent = String(playerScore);
     computerPoints.textContent = String(computerScore);
+    
 }
 function putButton(){
-    const container = document.querySelector('.mainContent');
     const button = document.createElement('button');
     button.classList.add('button', 'green');
     button.setAttribute('id', 'reset');
     button.textContent = "Play Again";
-    container.appendChild(button);
+    container.insertBefore(button, log);
 }
 function endgame(){
     putButton();
     const resetBtn = document.querySelector('#reset');  
-    resetBtn.addEventListener('click',() => location.reload());
+    resetBtn.addEventListener('click',() => location.reload());//refresh page for new game
     optionBtn.forEach(button => {
         button.setAttribute('disabled', '');//i guess takes away eventListener
-      });
+    });
     if(playerScore>computerScore){
         roundResults.textContent = "You Won! You are so Lucky!!!!";
         roundResults.style.color = 'green';
@@ -57,13 +63,16 @@ function endgame(){
         roundResults.style.color = 'blue';
     }
 }
+function createp(text) {
+    const p = document.createElement('p');
+    p.textContent = text;
+    return p;
+  }
 function playRound(playerSelection1, computerSelection) {
     playerSelection = playerSelection1.toUpperCase().trim();
-    compchoice.textContent = String(computerSelection);
-    if(playerScore==5|| computerScore==5){
-      endgame();
-    }
-    else if (playerSelection === computerSelection) {
+    playerContainer.appendChild(createp(playerSelection));
+    computerContainer.appendChild(createp(computerSelection));
+    if (playerSelection === computerSelection) {
       displayScore("Tie");
     }
     else if (
